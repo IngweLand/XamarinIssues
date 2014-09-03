@@ -22,17 +22,22 @@ namespace Test
 			_testView = new UIView (View.Frame);
 			View.Add (_testView);
 			//case 1
-			_testView.Layer.Delegate = new TestLayerDelegate ();
+			_testView.Layer.Delegate = new TestLayerDelegate (_testView.Layer);
 			//case 2
 			//_testView.Layer.Delegate = new CALayerDelegate ();
-			//_testView.Layer.SetNeedsDisplay ();
+			_testView.Layer.SetNeedsDisplay ();
+		}
+
+		public override void ViewDidDisappear (bool animated)
+		{
+			base.ViewDidDisappear (animated);
 		}
 
 		protected override void Dispose (bool disposing)
 		{
-			Console.WriteLine ("---dispose {0}", this);
+			Console.WriteLine ("---dispose Controller");
 			base.Dispose (disposing);
-			Console.WriteLine ("---postdispose {0}", this);
+			Console.WriteLine ("---postdispose Controller");
 		}
 
 	}
